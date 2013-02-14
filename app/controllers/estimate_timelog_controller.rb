@@ -212,10 +212,11 @@ class EstimateTimelogController < ApplicationController
 
       sql  = "SELECT "
       if params[:est_type] == '1'
-        sql << "#{sql_select_all}, sum(if(child_cnt = 0, yotei.hours_est, 0)) hours_est,"
-        sql << "sum(if(child_cnt != 0, yotei.hours_est, 0)) hours_est_all, "
-        sql << "sum(if(child_cnt = 0, yotei.hours, 0)) hours, "
-        sql << "sum(if(child_cnt != 0, yotei.hours, 0)) hours_all "
+        sql << "#{sql_select_all},"
+        sql << "sum(if(child_cnt = 0, yotei.hours_est, null)) hours_est,"
+        sql << "sum(if(child_cnt != 0, yotei.hours_est, null)) hours_est_all, "
+        sql << "sum(if(child_cnt = 0, yotei.hours, null)) hours, "
+        sql << "sum(if(child_cnt != 0, yotei.hours, null)) hours_all "
       elsif params[:est_type] == '2'
         sql << "#{sql_select_all}, yotei.hours_est hours_est, jisseki.hours "
       end

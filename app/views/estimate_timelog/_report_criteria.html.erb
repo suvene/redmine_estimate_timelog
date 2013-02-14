@@ -21,16 +21,12 @@
         wkrow = select_hours(hours_for_value, @columns, '')
         if (criterias.length - 1 == level)
           total_est += sum_hours_est(wkrow)
+          total += sum_hours(wkrow, true)
         else
           total_est_all += sum_hours_est(wkrow)
         end
     -%>
     <td class="hours"><%= html_hours("%.2f" % total_est) if total_est > 0 %><%= raw '(' + html_hours("%.2f" % total_est_all) + ')' if total_est_all > 0 %></td>
-    <%
-        if (criterias.length - 1 == level)
-          total += sum_hours(wkrow, true)
-        end
-    -%>
     <td class="hours"><%= html_hours("%.2f" % total) if total > 0 %></td>
 
     <% if criterias.length <= level+1 && @issue_cols -%>
