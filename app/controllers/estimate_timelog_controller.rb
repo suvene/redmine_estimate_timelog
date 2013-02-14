@@ -279,7 +279,7 @@ class EstimateTimelogController < ApplicationController
 
     respond_to do |format|
       format.html { render :layout => !request.xhr? }
-      format.csv  { send_data(report_to_csv_est(@criterias, @issue_cols, @hours), :type => 'text/csv; header=present', :filename => 'timelog.csv') }
+      format.csv  { send_data(report_to_csv_est(@criterias, @issue_cols, @hours), :type => 'text/csv; header=present', :filename => 'timelog_report.csv') }
     end
   end
 

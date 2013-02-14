@@ -218,6 +218,7 @@ module EstimateTimelogHelper
   end
 
   def report_criteria_to_csv(csv, criterias, issue_cols, hours, level=0)
+    debugger
     hours.collect {|h| h[criterias[level]].to_s}.uniq.each do |value|
       hours_for_value = select_hours(hours, criterias[level], value)
       next if hours_for_value.empty?
