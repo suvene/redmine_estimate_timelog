@@ -226,12 +226,19 @@ module EstimateTimelogHelper
       row += [''] * (criterias.length - level - 1)
       total_est = 0
       total = 0
-        sum_est = sum_hours_est(select_hours(hours_for_value, @columns, ''))
+        wkrow = select_hours(hours_for_value, @columns, '')
+        sum_est = sum_hours_est(wkrow)
         total_est += sum_est
+        sum_est_parent = sum_hours_est(select_hours(hours_for_value, @columns, ''), true)
         sum = sum_hours(select_hours(hours_for_value, @columns, ''))
         total += sum
-      row << "%.2f" %total_est
-      row << "%.2f" %total
+      if (criterias.length - 1 == level)
+        row << (total_est > 0 ? "%.2f" %total_est : nil)
+        row << (total > 0 ? "%.2f" %total : nil)
+      else
+        row << nil
+        row << nil
+      end
       if (criterias.length <= (level+1)) && issue_cols
         issue_cols.each do |col|
           row << get_issuescol(hours_for_value, @columns, col)
